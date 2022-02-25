@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<!--
+	Eunji Noh Portfolio
+	https://dspeanut.github.io/DSpeanutBlog/ | @ajlkn
+-->
+<html>
+	<head>
+		<title>Eunji Noh's Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="index.html" class="logo">
+									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">EUNJI NOH</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="generic.html">Ipsum veroeros</a></li>
+							<li><a href="generic.html">Tempus etiam</a></li>
+							<li><a href="generic.html">Consequat dolor</a></li>
+							<li><a href="elements.html">Elements</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Rotten Tomatoes Movie Analysis</h1>
+							<span class="image main"><img src="images/Rotten tomatoes/cinema_post.jpg" alt="" /></span>
+							<p><h2>Movie rate & review analysis using web-scraping</h2>
+							
+							The main goal of this project is to scrape data from <a href = https://www.rottentomatoes.com/>Rotton Tomatoes website</a> and conduct movie data analysis. 
+							<a href = https://www.rottentomatoes.com/top/bestofrt/?year=2021>The target webpage</a> includes the top 100 movies for each year with movie ratings and the number of reviews.
+							*Due to the limitation of the dataset(100 per year), the result may not represent the entire movie trend.
+							<br/><br/>
+							From this analysis, I would like to explore and find the answers to below questions:
+							<br/>
+							<ol><li>Which movie was most reviewed for the past 10 years?</li>
+							<li>Which movie was most rated for the past 10 years?</li></ol><hr /></p>
+						
+							<p><h3>Project skill goals</h3>
+							<ul><li>Web-scraping</li>
+							<li>Data Manipulation</li>
+							<li>Explaroty Data Analysis</li>
+							<li>Data Visualization</li></ul></p>
+							
+							
+							<p><h3>Used tools</h3>
+								<ul><li>Urllib</li>
+								<li>BeauutifulSoup</li>
+								<li>Pandas</li>
+								<li>Seaborn</li>
+								<li>Regular Expression</li>
+								<li>Matplotlib</li></ul></p>
+							<hr />
+							<br/>
+
+							<h2><u>Part 1</u> Exploratory Data Analysis</h2>
+							
+							
+							<p> Rotten Tomatoes posts the top 100 movies every year on <a href= https://www.rottentomatoes.com/top/bestofrt/?year=2021>their website.</a> 
+								I wanted to scrape this webpage and explore the data to find some interesting insights. 
+								By using python packages 1) Urllib and 2) Beautifulsoup, the webpage was successfully scrapped and 
+								the data includes movie ratings, titles, and the number of reviews for 2021.</p>
+
+								<p><center><span class="image"><img src="images/Rotten tomatoes/image3.png" alt="" /></center>
+									<center><figcaption><font size = "3"><b>Figure 1.</b> Top 10 movies for 2021 on Rotten Tomatoes</figcaption></font></center></p>
+									
+								<p> Figure 1 shows the top 10 movies for 2021 from Rotten Tomatoes. The best movie of 2021 is <b>Nomadland</b>
+								However, This ranking table is sorted by neither the number of reviews nor ratings. 
+								The ranking is based on adjusted scores which is a weighted formula(Bayesian) designed by Rotten Tomatoes. <br/>
+								Now, Let's explore which movie is most reviewed and rated for 2021.</p>
+								
+								<div class = "figure"><center><img src="images/Rotten tomatoes/most_reviewd_2021.png" alt="" />
+									<img src="images/Rotten tomatoes/most_reviewed_chart.png" alt="" /></center></div>
+								<p><center><figcaption><font size = "3"><b>Figure 2.</b> 10 most reviewed movies out of top 100 for 2021</figcaption></font></center></p>
+								<p>By sorting the movies with their number of reviews, now we can see that <b>Dune</b> was the most reviewed movie for 2021 with 450 reviews 
+									followed by <b>Black Widow</b>(438) and <b>Nomadland</b>(420). Although Dune is the most reviewed movie, its rating seems pretty low at only 83%. This is probably the reason why Dune is only ranked at 42nd on the top 100 chart.
+
+
+								<p><center><span class="image"><img src="images/Rotten tomatoes/most_rated_table.png" alt="" /></center>
+										<center><figcaption><font size = "3"><b>Figure 3.</b> 10 Most rated movies out of top 100 for 2021</figcaption></font></center></p>
+										
+								<p>The top 10 high-rated movies have all 100% ratings! Despite the small number of reviewers, 
+										they must have loved these movies. However, this result doesn't provide much useful information. 
+										Let's find the lowest-rated movie.</p>
+								<div class = "figure"><center><img src="images/Rotten tomatoes/least_rated_table.png" alt="" />
+								<img src="images/Rotten tomatoes/least_rated_chart.png" alt="" /></center></div>
+								<p><center><figcaption><font size = "3"><b>Figure 4.</b> The least rated 10 movies out of top 100 for 2021</figcaption></font></center></p>
+								<p><b>Black Widow</b> is the lowest-rated movie among the top 100 movies! and <b>Dune</b> has ranked as the second-lowest.
+								Interestingly, both <b>Black Widow</b> and <b>Dune</b> were ranked very high on 'Most reviewed movies' chart, but not on top 10 movies. 
+								Given this result, we can assume people made many reviews on these movies but gave very small rating at the same time. 
+								They must be very disappointed. </p>
+
+							<h2><u>Part 2</u> Movie analysis from 2012 to 2021</h2>
+
+							<p>2021 data has some interesting fact, and now I would like to explore more what movies were loved and hated for the past 10 years.</p>
+							
+							<div class = "figure"><center><img src="images/Rotten tomatoes/tenyears_table.png" alt="" />
+								<img src="images/Rotten tomatoes/tenyears_reviews_trendline.png" alt="" /></center></div>
+							<p><center><figcaption><font size = "3"><b>Figure 5.</b> The total number of reviews for top 100 movies from 2012 to 2021</figcaption></font></center></p>
+
+							<br/>
+							<p>During 10 years, approximately 16,000 reviews were made on average. 
+							The figure 4 line-graph(right) illustrates how the number of reviews have been chaning over the 10 years. 
+							Starting from 2015, the number of reviews increased rapidly until it reachs a peak in 2018 and decreases significantly. 
+							The dataset doesn't have much information for reason of this hugh drop, 
+							but we can assume few reasons: COVID 19, Appearance of competitors etc.</p>
+
+
+							<div class = "figure"><center><img src="images/Rotten tomatoes/tenyears_rate_table.png" alt="" />
+								<img src="images/Rotten tomatoes/tenyears_average_rate.png" alt="" /></center></div>
+							<p><center><figcaption><font size = "3"><b>Figure 6.</b> The average rating for top 100 movies from 2012 to 2021</figcaption></font></center></p>
+
+							<br/>
+							<p>The average ratings of top 100 movies each year remain steadily through the years. 
+								The average of rating for top 100 movies is 93.50%.<br/>
+								
+							Now, we can get back to our initial question.
+							
+							<b>"Which movie was most reviewed for the past 10 years?"</b>  The answer is found below.</p><br/>
+
+							<p><center><span class="image"><img src="images/Rotten tomatoes/tenyears_mostreviewed_table.png" alt="" /></center>
+								<center><figcaption><font size = "3"><br/><b>Figure 7.</b> The top 10 most reviewed movies from 2012 to 2021</figcaption></font></center></p>
+							<p><b>Once Upon a Time In Hollywood(2019)</b> was the most reviewed movie out 1,000 movies between 2012 to 2021. Our second question was <b>"Which movie was most rated for the past 10 years?"</b> </p><br/>
+
+							<div class = "figure"><center><img src="images/Rotten tomatoes/tenyears_highrate_table.png" alt="" />
+								<img src="images/Rotten tomatoes/tenyears_lowrate_table.png" alt="" /></center></div>
+							<p><center><figcaption><font size = "3"><b>Figure 8.</b> The top 10 most/least rated movies from 2012 to 2021</figcaption></font></center></p>
+							
+							<p>Figure 8(left) table shows the most rated movies list. However, all the top rated movies are same as 100% which is expected. 
+								Instead, let's take a look at the least rated movie on the right table. 
+								As we can see from Figure 8(right), the movie <b>Brave</b> and <b>The Revenant</b> were selected as the least favorite movie at 78% rating.</p>
+							<div class = "figure"><center><img src="images/Rotten tomatoes/tenyears_most_reviewed.png" alt="" />
+								<img src="images/Rotten tomatoes/tenyears_lowestrate_chart.png" alt="" /></center></div>
+
+								<p><center><figcaption><font size = "3"><b>Figure 9.</b> The top 10 most/least rated movies from 2012 to 2021</figcaption></font></center></p>
+
+<br/>
+
+
+
+
+<center><b><font size = "10"> CONCLUSION </font></b></center>
+
+<p>By conducting expolatory data analysis on the data, we found the most reviewed movie for the past 10 years:<b> Once Upon a Time In Hollywood(2019)</b>.
+On the other hand, the most rated movie for the past 10 years was not a single choice since there were many movies rated as 100%. Alternatively, I found the least rated movie for the past 10 years: <b>Brave(2012)</b> and <b>The Revenant</b>.
+</p><br/>
+
+<b>* Please note this result is only based on Top 100 movies from 2012 to 2021. </b>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						</div>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<section>
+								<h2>Get in touch</h2>
+								<form method="post" action="#">
+									<div class="fields">
+										<div class="field half">
+											<input type="text" name="name" id="name" placeholder="Name" />
+										</div>
+										<div class="field half">
+											<input type="email" name="email" id="email" placeholder="Email" />
+										</div>
+										<div class="field">
+											<textarea name="message" id="message" placeholder="Message"></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send" class="primary" /></li>
+									</ul>
+								</form>
+							</section>
+							<section>
+								<h2>Follow</h2>
+								<ul class="icons">
+									<li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-dribbble"><span class="label">Dribbble</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-500px"><span class="label">500px</span></a></li>
+									<li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
+									<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+								</ul>
+							</section>
+							<ul class="copyright">
+								<li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
