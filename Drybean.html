@@ -78,67 +78,152 @@
 							<br/>
 
 							<h2><u>Part 1</u>　 Exploratory Data Analysis</h2>
-							<p><script src="https://gist.github.com/DSpeanut/1c2da023a06cb630e6ccbaff22b5e9ca.js"></script></p>
-
-							<center><span class="table-wrapper">
-								<table class="alt" style="width: 800px">
-									<thead>
-										<tr>
-											<th>Instance</th>
-											<th>Description</th>
-											<th>Formula</th>
-											<th>Data type</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Area(A)</td>
-											<td>The area of a bean zone and the number of pixels within its boundaries</td>
-											<td> N/A </td>
-											
-										</tr>
-										<tr>
-											<td>Address</td>
-											<td>Customer’s registered address</td>
-										</tr>
-										<tr>
-											<td>Avatar</td>
-											<td>Customer selected avatar for profile</td>
-										</tr>
-										<tr>
-											<td>Avg. Session length</td>
-											<td>Average time spent per each session(mins)</td>
-										</tr>
-										<tr>
-											<td>Time on App</td>
-											<td>The time customer spent on the application(mins)</td>
-										</tr>
-										<tr>
-											<td>Time on Website</td>
-											<td>The time customer spent on the website(mins)</td>
-										</tr>
-										<tr>
-											<td>Length of Membership</td>
-											<td>Customer length of membership</td>
-										</tr>
-										<tr>
-											<td>Year Amount Spent</td>
-											<td>Total purchase amount by the customer</td>
-										</tr>
-									</tbody>
-								</table>
-							<caption><font size = "3"><b>Table 1.</b> Data Description</font></caption></center></span>
-
-
-							<p>First of all, all the necessary packages are loaded into R. Using 'Skimr' package I checked the summary of data and how it's formed</p>
-
-							<p><center><span class="image"><img src="images/Drybean/skim result.png" alt="" /></span></center>
-								<center><figcaption><font size = "3"><b>Figure 1.</b> Data summary</figcaption></font></center></p>
-	
 							
+							<p><center><span class="image"><img src="images/Drybean/data description.png" alt="" /></span></center>
+								<center><figcaption><font size = "3"><b>Table 1.</b> Data summary</figcaption></font></center></p>
+	
+							<p>The dataset contains a total of 17 variables and 13,611 observations. 
+								Most of the variables are representing the shape of the bean such as length, diameter, 
+								on the other hand, some of the variables are created by combining two variables such as 'Aspect Ratio'(Combination of MajorAxisLength and MinorAxisLength). 
+								The dataset include integer, float, and string types.
+								Finally, the dependent variable of the model is ‘Class’ which is divided into seven classes of beans: 
+								‘Barbunya’,‘Bombay’, ‘Cali’, ‘Dermason’, ‘Horoz’, ‘Seker’, ‘Sira’. </p>
+							
+								<p><script src="https://gist.github.com/DSpeanut/1c2da023a06cb630e6ccbaff22b5e9ca.js"></script></p>
 
 
+							<p>First of all, all the necessary packages are loaded into R. Using 'Skimr' package I checked the summary of data and how it's formed.</p>
+
+							<p><center><span class="image"><img src="images/Drybean/targetvariable.png.jpeg" alt="" /></span></center>
+								<center><figcaption><font size = "3"><b>Figure 1.</b> Dependent variable analysis</figcaption></font></center></p>
+							<p> The dependent variable has 7 classes and each class has a different size. 
+								Among seven classes, Dermason was the largest class with 26% followed by Sira(19%), Seker(14%), and Horoz(14%). 
+								These four classes take over approximately 70% of the dataset. 
+								The smallest size of the class was Bombay around 4%.</p>
+	
+							<p><center><span class="image fit"><img src="images/Drybean/All.jpg" alt="" /></span></center>
+								<center><figcaption><font size = "3"><b>Figure 2.</b> Independent variable analysis</figcaption></font></center></p>
+
+							<p>
+							Independent variables were plotted for analysis and some interesting findings are listed below:
+								<ol><li>Data follows a normal distribution in spite of slight skewness in most variables.</li>
+								<li>The class ‘Bombay’ has a slightly different pattern to the other classes in the following variables: Area, Perimeter, MajorAxisLength, MinorAxisLength, ConvexArea, EquivDiameter, ShapeFactor1.
+								For example, in ‘Area’ variable while the mean values of other classes are small and similar to each other, Bombay’s mean value is relatively greater and separated from others.</li>
+								<li>Area, Perimeter, MajorAxisLength, MinorAxisLength variables are all highly correlated.</li>
+								<li>Some of the variables' scatterplots show the seven classes are well separated.</li></ol>
+							</p>
 								
+
+							<h2><u>Part 2</u>　 Data Modeling</h2>
+							<h3>I. Tree-based models</h3>
+							<h4>1. General Decision Tree Model</h4>
+
+							<p><center><span class="image fit"><img src="images/Drybean/general decision tree.jpeg" alt="" /></span></center>
+								<center><figcaption><font size = "3"><b>Figure 3.</b> General Decision Tree</figcaption></font></center></p>
+							<p>The problem I would like to solve with this dataset is the ‘multi-class classification problem’ and the trees were built. 
+								During the tree modeling process , it will select the variable that gives the best split which is either the lowest Gini index or Entropy. 
+								After repeating this process several times until no further gain can be made or any other pre-set stopping rules are satisfied.
+								Before modeling, the dataset was divided into two groups for the performance testing: train-data (10,889 observations) and test-data (2,722 observations). 
+								Throughout this assignment, all models were trained using train-data and tested for their performances by comparing predicted values and real values with a confusion matrix.
+								Given the dataset, the general tree was built and plotted as figure 3. The tree size was 11 and a depth of 6. 
+								Seven variables out of 16 were used as internal nodes : MajorAxisLength , MinorAxisLength , Perimeter , Compactness, ConvexArea, ShapeFactor1, and roundness. 
+								These seven variables are considered to be the most important features for the fitted trees . 
+								Adjusting the stopping rule such as changing minimum observation in each section will allow to use of all the 16 variables and also may increase tree size and training accuracy, 
+								however it can also lead to overfitting.</p>
+
+							
+							<h4>2. Pruned Tree Model</h4>
+
+							<p><center><span class="image fit"><img src="images/Drybean/pruned_tree.png" alt="" /></span></center>
+								<center><figcaption><font size = "3"><b>Figure 4.</b> Mis-class level by pruned tree-size(left)/Pruned tree with size of 7(right)</figcaption></font></center></p>
+							<p>One of the ways to prevent overfitting the tree is ‘Pruning’. Pruning identify the least reliable branches and remove them to decrease generalization error. 
+								The pruning process was tested to check if test accuracy can be increased . 
+								The result of pruning tree was evaluated with the number of misclassifications based on the pruned tree size (Figure 4 left chart). 
+								The tree size 7 was finally selected and the tree was plotted as figure 4(right).
+								The pruned tree had a size of 7 and it only used 4 variables (MajorAxisLength, MinorAxisLength, Compactness, and ShapeFactor) for the splitting. 
+								The training accuracy was 84.98% and the testing accuracy was 84.35%. <br/></p>
+								
+								<p><center><span class="image"><img src="images/Drybean/generalvsprune.png" alt="" /></span></center>
+									<center><figcaption><font size = "3"><b>Table 2.</b> Comparison between a general tree and a pruned tree on test/training accuracy</figcaption></font></center></p>	
+								<p>Unexpectedly, the pruned tree had a lower accuracy on both train-data and test-data than the previous tree. 
+								Normally pruning can reduce the training accuracy and increase the test accuracy. 
+								However, in this case, it can be assumed that the tree was possibly over-pruned, thus it became a too simple tree to produce good accuracies considering the large-size of data.
+								 As it can be seen in figure 4, the right chart shows an overly pruned tree size of 7 and a depth of 5. 
+								Therefore, pruning was not very effective to get high accuracy of the general decision tree in this case. 
+								However, changing the stopping rule of the general tree might be helpful to get a higher test accuracy.</p>
+
+
+							<h4>3. RandomForest Model</h4>
+							<p>Given the train-data, random forest model was trained with subset selections of a total of 16 independent variables, and variable importance was plotted as figure 5.</p>
+							<p><center><span class="image"><img src="images/Drybean/featureimportance.png" alt="" /></span></center>
+								<center><figcaption><font size = "3"><b>Figure 5.</b> Feature Importance by Random Forest model</figcaption></font></center></p>
+							<p>Figure  5  illustrates  the  feature  importance  by  MeanDecreaseAccuracy  and  MeanDecreaseGini.  
+								MeanDecreaseAccuracy represents how much decrease will occur if the corresponding variable is not included in the tree. 
+								The mean decrease in the Gini coefficient is a measure of how each variable contributes to the homogeneity of the nodes and leaves in the resulting random forest. 
+								In both measurements, ‘ShapeFactor1’ and ‘MajorAxisLength’ were in the top 3 important variables. 
+								The top 10 variables out of 16 appear to make a relatively large impact on the accuracy.<br/></p>
+
+							<p><center><span class="image"><img src="images/Drybean/Randomforesttuning.png" alt="" /></span></center>
+								<center><figcaption><font size = "3"><b>Figure 6.</b> Test accuracy by the number of subset variables selected (left) / the number of trees(right)</figcaption></font></center></p>
+							<p> As a further exploration , subset variable numbers and the number of trees were measured by cross - validation and the results are plotted in figure 6. 
+								In terms of tree numbers, between the 20 to 100 trees the model produced similar accuracies range in 92%~93%. 
+								Only the random-forest model with tree-size below 10 had poor accuracy around 89%. 
+								The result of subset variable number testing is plotted(Figure 6 right).Unlike the number of trees testing , the subset variable testing did not show a clear pattern to choose the optimal value.
+								The maximum test accuracy was from choosing 54 trees and subset variable number 9. 
+								With this result, the random-forest model was tested again resulting in train accuracy of 99%, test accuracy of 92%.<br/></p>
+
+							<h4>3. Boosting Model</h4>
+
+							<p>For boosting model, there are three parameters to tune, 1) the number of trees, 2) the shrinkage parameter, 3) the number of splits in each tree. 
+								These three parameters were tested to identify the optimal parameter values to get the highest test accuracy.</p>
+							
+							<p><center><span class="image"><img src="images/Drybean/Boosting_numberoftrees.jpeg" alt="" /></span></center>
+								<center><figcaption><font size = "3"><b>Figure 7.</b> Test accuracy by the number of trees (boosting model)</figcaption></font></center></p>
+							
+							<p>The optimal number of trees was identified by cross-validation on test accuracy. (See figure 7) 
+								Since the testing focused on the number of trees, the shrinkage was fixed at 0.01 and the interaction depth was fixed at 1. 
+								As the graph shows, the model between 0 to 100 trees had relatively low test accuracies and the graph increased steadily from 200 to 800.
+								After 800 to 1,000, no significant improvement was found. Therefore, the optimal number of trees was selected as 800.</p>
+
+							<p><center><span class="image"><img src="images/Drybean/boostingmodel.png" alt="" /></span></center>
+								<center><figcaption><font size = "3"><b>Table 3.</b> Comparison between boosting tree interaction depth and shrinkage for test accuracy</figcaption></font></center></p>
+							
+							<p>After the number of trees was selected, the Interaction depth and shrinkage tuning were conducted. 
+								Overall, when shrinkage was 0.01 test accuracy was higher than shrinkage of 0.001. 
+								Between the Interaction depth 1 and 2, the Interaction depth 2 outperformed the depth of 1. 
+								By training the optimal boosting model with 800 trees, 0.01 shrinkage, and 2 interaction depth, train accuracy has resulted in 93.92% and test accuracy was 92.84%. </p>
+	
+								
+							<p><center><span class="image"><img src="images/Drybean/treemodels.png" alt="" /></span></center>
+								<center><figcaption><font size = "3"><b>Table 4.</b> Comparison between three tree-based models</figcaption></font></center></p>
+							
+							<p>Between five different tree-based models, as shown in Table 4. 
+								There was a significant increase from the general decision tree model to the tuned random-forest model 
+								by nearly 6% and the boosting model was considered as the best model with the highest test accuracy of 92.84% </p>
+		
+							<h3>I. Deep Neural Network Models</h3>	
+
+							<p>Deep learning is a type of machine learning technique that learns the pattern of the unstructured data and learns the process to find the function to solve either ‘regression’ or ‘classification’ problems. 
+							The deep learning model is consisting of a node layer, units, weights. Depending on the neural network type the network can be divided into single-layer perceptron(SLP) or multi-layer perceptron(MLP). 
+							The idea of a neural network came from the human brain. 
+							These neural network components are functioning similarly to the human brain and can be trained like any other ML algorithm.</p>
+							<p>There are various neural network types which can be chosen depending on type of problem and the dataset. 
+							Most basic neural network is Artificial neural network (ANN) and Recurrent Neural Network (RNN) is often used for music composition, human action recognition. 
+							Long/Short-Term Memory (LSTM) is used for speech recognition or machine translation. 
+							For this project, ANN model was chosen considering the data type and the size. The final model will be tuned by testing various hyper-parameters. 
+							7 hyper-parameters were tested to choose the final model: 
+							1) The number of hidden units, 2) The number of hidden layers, 3) The number of epochs, 4) The number of batch-size, 
+							5) Activation functions, 6) Optimizers. 7) Regularization. 
+							While one parameter is being tested other parameters were fixed as same for accurate comparison.</p>
+
+
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
+								<br/>
 								<br/>
 								<p>The dataset is the customer data from e-commerce website and it contains customer purchasing and activity history information. 
 									The dataframe consists of total 8 variables (3 Categorical variables and 5 Numerical variables). 
