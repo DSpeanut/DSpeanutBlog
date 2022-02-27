@@ -1,0 +1,348 @@
+<!DOCTYPE HTML>
+<!--
+	Eunji Noh Portfolio
+	https://dspeanut.github.io/DSpeanutBlog/
+-->
+<html>
+	<head>
+		<title>Eunji Noh's Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="index.html" class="logo">
+									<span class="symbol"><img src="images/Main logo/peanut logo.png" alt="" /></span><span class="title">EUNJI NOH</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="Rottentomatoes.html">Project 1: Movie Analaysis project</a></li>
+							<li><a href="E-commerce.html">Project 2: E-commerce customer modling project</a></li>
+							<li><a href="Drybean.html">Project 3: Multiclass classification and model comparison project</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Multiclass classification and model comparison</h1>
+							<span class="image main"><img src="images/Drybean/Beans_post.png" alt="" /></span>
+							<p><h2>Multilclass classification and model comparison:<br/>
+								Tree-based vs Deep learning models on drybean dataset</h2>
+							
+								The main goal of this project is to build the classification models using both tree-based and deep learning models to evaluate predictive model performance. 
+								The dataset used for this project is <b>Dry Bean Dataset</b> from <a href="https://archive.ics.uci.edu/ml/datasets/Dry+Bean+Dataset">UCI Machine Learning Repository</a>
+								<br/><br/>
+								From this analysis, I would like to explore and find the answers to below questions:
+								<br/>
+								   <ol><li>1. Building a model for multiclass classification</li>
+									   <li>2. Does deep learning model perform better than tree-based model?</li>
+									   <li>3. Which model should be used?</li>
+									</ol><hr /></p>
+
+							<p><h3>Project skill goals</h3>
+							<ul><li>Explaroty Data Analysis</li>
+							<li>Data Wrangling</li>
+							<li>Data Visualization</li>
+							<li>Data Modeleling(Decision tree and Deep learning models)
+							<li>Hyperparameter tuning</li></ul></p>
+							
+							
+							<p><h3>Used tools</h3>
+								<ul><li>R: Skimr, Tree, Caret, RandomForest, Gbm, dplyr, ggplot2, GGally</li>
+								<li>Python : Numpy, Pandas, Matplotlib, Tensorflow, Sklearn</li>
+							<hr />
+							<br/>
+
+							<h2><u>Part 1</u>　 Exploratory Data Analysis</h2>
+							<p><script src="https://gist.github.com/DSpeanut/1c2da023a06cb630e6ccbaff22b5e9ca.js"></script></p>
+
+							<center><span class="table-wrapper">
+								<table class="alt" style="width: 800px">
+									<thead>
+										<tr>
+											<th>Instance</th>
+											<th>Description</th>
+											<th>Formula</th>
+											<th>Data type</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Area(A)</td>
+											<td>The area of a bean zone and the number of pixels within its boundaries</td>
+											<td> N/A </td>
+											
+										</tr>
+										<tr>
+											<td>Address</td>
+											<td>Customer’s registered address</td>
+										</tr>
+										<tr>
+											<td>Avatar</td>
+											<td>Customer selected avatar for profile</td>
+										</tr>
+										<tr>
+											<td>Avg. Session length</td>
+											<td>Average time spent per each session(mins)</td>
+										</tr>
+										<tr>
+											<td>Time on App</td>
+											<td>The time customer spent on the application(mins)</td>
+										</tr>
+										<tr>
+											<td>Time on Website</td>
+											<td>The time customer spent on the website(mins)</td>
+										</tr>
+										<tr>
+											<td>Length of Membership</td>
+											<td>Customer length of membership</td>
+										</tr>
+										<tr>
+											<td>Year Amount Spent</td>
+											<td>Total purchase amount by the customer</td>
+										</tr>
+									</tbody>
+								</table>
+							<caption><font size = "3"><b>Table 1.</b> Data Description</font></caption></center></span>
+
+
+							<p>First of all, all the necessary packages are loaded into R. Using 'Skimr' package I checked the summary of data and how it's formed</p>
+
+							<p><center><span class="image"><img src="images/Drybean/skim result.png" alt="" /></span></center>
+								<center><figcaption><font size = "3"><b>Figure 1.</b> Data summary</figcaption></font></center></p>
+	
+							
+
+
+								
+								<br/>
+								<p>The dataset is the customer data from e-commerce website and it contains customer purchasing and activity history information. 
+									The dataframe consists of total 8 variables (3 Categorical variables and 5 Numerical variables). 
+									The data has total 500 observations.</p>
+								<p><center><span class="image"><img src="images/E-commerce/[Resized]originaldf.png" alt="" /></span></center>
+									<center><figcaption><font size = "3"><b>Table 2.</b> First 5 rows of the dataset</figcaption></font></center></p>
+		
+								<p>  Table 2 shows some statistical values of each numerican variable. 
+									On average customers spent 33 minutes per each session and people tend to stay longer on the website compared to the application. 
+									The customer spent minimum $256 upto $765 and $499 on average.
+									The email and address are not included in the variable selection for the modeling. 
+									However, I wanted to see if ‘Avatar’ information might have some impact on the customer purchase trend.
+								<br/>
+								 The email and address are not included in the variable selection for the modeling. 
+								However, I wanted to see if ‘Avatar’ information might have some impact on the customer purchase trend.</p>
+								<p><center><span class="image"><img src="images/E-commerce/avatar.png" alt="" /></center>
+									<center><figcaption><font size = "3"><b>Table 3.</b> The correlation coefficients of variable 'Avatar'</figcaption></font></center></p>
+								<p>The table 3 shows that the avatar features have insignificant relationships with the ‘Yearly Amount Spent’ variable. 
+									Therefore, this variable is not included in the modeling variables.</p> 
+
+								<p><center><span class="image"><img src="images/E-commerce/[Resized]pairplot.png" alt="" /></center>
+								<center><figcaption><font size = "3"><b>Figure 1.</b> Paired plots of numerical variables</figcaption></font></center></p>
+								<p> The paired plot indicates all numerical variables follow a normal distribution. 
+									From the plots it looks like the variable ‘Length of membership’ is highly correlated with the target variable ‘Year Amount Spent’.
+									 Also, ‘Time on App’ looks slightly correlated. </p>
+									
+								<script src="https://gist.github.com/DSpeanut/4c9c8bcf5c858aaabdcb67a27ff72441.js"></script>
+								<p>To confirm if all numerical variables follow normal distributions, I have conducted **Shapiro-Wilk Test** for normality test.
+									 All test results did not reject H0, therefore all numerical variables follow normal distributions.
+									 The columns 'Email', 'Address', 'Avatar' are removed, then I checked the correlation coefficients of variables using seaborn's heatmap.</p>
+									 
+								
+								<script src="https://gist.github.com/DSpeanut/0817b4339673352becf86644223ed832.js"></script>
+								<br/>
+								<center>
+									<span class="image"><img src="images/E-commerce/Correlation coefficients.png" alt="" /></center></span>
+									 <center><figcaption><font size = "3"><b>Figure 2.</b> Correlation coefficients heatmap</figcaption></font></center>
+								<br/>
+								<p>The heatmap confirm that the variable <b>'Length of Membership'</b> has a strong relationship with the <b>'Year Amount Spent'</b> as its coefficient is 0.81. 
+									The variable <b>'Time on App'</b>'s correlation coefficient is 0.5 which is considered to be a strong positive relationship. 
+									<b>'Avg. Session length'</b> has a moderate positive relationship. On the other hand, unlike other variables 
+									<b>'Time on Website'</b> has a negative correlation coefficient. Since the value is nearly 0, this variable has almost no relationship to the target variable.</p>
+									<p>There are several ways to evaluate a predictive model performance. For this project The Pareto Principle and 10-fold cv methods were used.</p> 
+									<p>
+									1. The Pareto Principle :  It's also called 80-20 rules. The dataset will be split into 80% and 20%. 
+									80% of data will be used for training the model and 20% of data will be used for evaluation of model performance.</br>
+									2. K-fold cross validation : Split the dataset into k groups and select one group as a hold out(test set) and train the model on rest of groups(l-1 groups). 
+									Repeat the process 10 times to use all unique group as a test set. Then calcualte the average of the result of all iterations. </p>
+								
+								<h2><u>Part 2</u>　 Linear Regression Model</h2>
+								<script src="https://gist.github.com/DSpeanut/2a6d79a14772cf7b28ae261da909f3bd.js"></script>
+									 
+								<p>The data-set is split into 80% and 20%. Then model was trained and tested accordingly</p>
+								<center>
+									<span class="image"><img src="images/E-commerce/linearresult.png" alt="" /></center></span>
+									 <center><figcaption><font size = "3"><b>Table 4.</b> The correlation coefficients of variable 'Avatar'</figcaption></font></center>
+
+								<br/>	
+								<p>The linear model is fitted on the train-data. Each variable has coefficients as it shown table 4.</p>
+								
+								The homoscedasticity was checked with the residual plot.
+
+
+								<script src="https://gist.github.com/DSpeanut/cf1b22aae743bc2bc6adf47c7ce57317.js"></script>
+
+
+								<center>
+									<span class="image"><img src="images/E-commerce/Residual plot.png" alt="" /></center></span>
+									 <center><figcaption><font size = "3"><b>Figure 3.</b> Residual plot</figcaption></font></center>
+								<p> Residual plot shows there is no particular pattern in the predicted values using the linear model. Therefore, Fitted linear regression model satisfy the homoscedasticity assumption</p>
+
+								<script src="https://gist.github.com/DSpeanut/4602abdfb774fbb43d660cdfae77fc80.js"></script>
+
+								To evaluate the performance, linear model was used to predict 'Year Amount Spent' based on the test data(x variables). 
+								Table 5 represent the performace result using both 'The Pareto Principle' and '10-fold cross-validation' methods.</p>
+								
+								<center>
+									<span class="image"><img src="images/E-commerce/comp.png" alt="" /></center></span>
+									 <center><figcaption><font size = "3"><b>Table 5.</b> Model performance on test data</figcaption></font></center>
+
+								
+								<script src="https://gist.github.com/DSpeanut/375a5e2ffd45bebbeb4d5691c7c066e1.js"></script>
+
+								<p>Since the linear model is built, I have tested the model to predict 'Yearly Spent Amount' for two new customers.
+
+								<blockquote> 
+									<b>Input</b><br/>
+									Customer 1 : 35,15,30,2 <br/>
+									Customer 2 : 40,20,20,4 <br/><br/>
+									
+									<b>Output</b><br/>
+									Customer1's　yearly purchase amount is approximately $568<br/>
+									Customer2's　yearly purchase amount is approximately $1013</blockquote>
+
+								<h2><u>Part 3</u>　 Logistic Regression Model</h2>
+
+
+								<p>In part 3, I would like to build a multiple logistic regression model to predict the customer class.
+								<ul><li>Independent variables : 'Avg. Session Length', 'Time on App', 'Time on Website','Length of Membership'</li>
+								<li>Dependent variable : 'Customer class(VIP, Regular)'</li></ul></p>
+								
+								Since 'year amount spent' was used to divide the customer class, it was not included in the independent variables.</p>
+
+								<script src="https://gist.github.com/DSpeanut/fc8e9eadd46f6e854eb7d44c0742ef6a.js"></script>
+								<p><center><span class="image"><img src="images/E-commerce/Classification.png" alt="" /></span></center>
+									<center><figcaption><font size = "3"><b>Table 6.</b> Assigning classification</figcaption></font></center></p>
+		
+								<p> The average yearly purchased amount by customer is $499.31. I simply divided the customer classes into 2 categories:</p>
+									<li>Class 1 : Customer who yearly spent amount is > $499</li>
+									<li>Class 0 : Customer who Yearly spent amount is < $499</li></p>
+
+								<p><center><span class="image"><img src="images/E-commerce/Correlation coefficients by customer class.png" alt="" /></span></center>
+									<center><figcaption><font size = "3"><b>Figure 4.</b> Paired plots by customer class</figcaption></font></center></p>
+
+								<p> The pairplot shows clear division between two different classe on the variables: 'Yearly Amount Spent', 'Length of Membership'. However, 'Time on App', 'Time on Website', and 'Avg. Session Length' variables did not seem to have a clear division line.</p>
+								<script src="https://gist.github.com/DSpeanut/f209123279d445aaf05820329eb3d22f.js"></script>
+								<p><center><span class="image"><img src="images/E-commerce/Logistic Regression Plots.png" alt="" /></center>
+									<center><figcaption><font size = "3"><b>Figure 5.</b> Logistic regression plots</figcaption></font></center></p>
+
+								<p>Using seabron package, the logistic regression graphs were plotted for all variables. 
+									Corresponding to the pairplot result, figure 5 shows that logistic regression were well fitted on all variables except 'Time on website'. 
+									Meaning the customers were not able to be divided by 2 classes using 'Time on website' variable.</p>
+								
+								<script src="https://gist.github.com/DSpeanut/bf2cad5fc84aed7e27e057e7030c43d3.js"></script>
+								
+								<p><center><span class="image"><img src="images/E-commerce/logistic result.png" alt="" /></center>
+									<center><figcaption><font size = "4"><b>Figure 6.</b> Logistic regression result</figcaption></font></center></p>
+								<p>The multiple logistic regression was trained and tested. The model has a 95% accuracy of classification. 
+									As it can be seen in confusion matrix, out of 125 customers 119 customers were correctly classified
+									(60 regular customers and 59 VIPs) and 6 customers were incorrectly classified.</p>
+								
+								<script src="https://gist.github.com/DSpeanut/8e880a6e3baee5a8eb84c44ebbbe5623.js"></script>
+
+								<p> As a last step, the multiple logistic regression model was used to predict customer's class with new data points. </p>
+			
+								<blockquote> 
+									<b>Input</b><br/>
+									New customer: 30, 15.265884, 35, 4.5 <br/>
+									
+									<b>Output</b><br/>
+									The new customer's yearly purchase amount is approximately $604<br/>
+									The customer is class VIP</blockquote>
+								
+
+								<center><b><font size = "10"> CONCLUSION </font></b></center>
+
+								<p>With this project, I successfully built multiple linear, logistic regression models to predict customer yearly spent amount and their customer class.
+									One interesting finding was that Time spent on app was important factor on customer purchase, wherease Time spent on website did not have a great impact.
+									This fact tells us that the company should focus on making a good quality and convinient application rather than the website.
+									Additionally, The company now can utilize these two models to identify target customers for various marketing promotions. 
+								</p><br/>
+									
+						</div>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<section>
+								<h2>Get in touch</h2>
+								<form method="post" action="#">
+									<div class="fields">
+										<div class="field half">
+											<input type="text" name="name" id="name" placeholder="Name" />
+										</div>
+										<div class="field half">
+											<input type="email" name="email" id="email" placeholder="Email" />
+										</div>
+										<div class="field">
+											<textarea name="message" id="message" placeholder="Message"></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send" class="primary" /></li>
+									</ul>
+								</form>
+							</section>
+							<section>
+								<h2>Follow</h2>
+								<ul class="icons">
+									<li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-dribbble"><span class="label">Dribbble</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-500px"><span class="label">500px</span></a></li>
+									<li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
+									<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+								</ul>
+							</section>
+							<ul class="copyright">
+								<li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
