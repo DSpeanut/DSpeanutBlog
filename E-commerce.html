@@ -21,7 +21,7 @@
 
 							<!-- Logo -->
 								<a href="index.html" class="logo">
-									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">EUNJI NOH</span>
+									<span class="symbol"><img src="images/Main logo/peanut logo.png" alt="" /></span><span class="title">EUNJI NOH</span>
 								</a>
 
 							<!-- Nav -->
@@ -77,6 +77,9 @@
 								<li>Sklearn</li></ul></p>
 							<hr />
 							<br/>
+
+
+							<h2><u>Part 1</u>　 Exploratory Data Analysis</h2>
 							<p><script src="https://gist.github.com/DSpeanut/7001ff88a63f4d831de849498dfcbd82.js"></script></p>
 							<p>First of all, all the necessary packages are loaded into python. The data is loaded and let's have a first look at the data.</p>
 
@@ -159,21 +162,21 @@
 								<script src="https://gist.github.com/DSpeanut/0817b4339673352becf86644223ed832.js"></script>
 								<br/>
 								<center>
-									<span class="image"><img src="images/E-commerce/greenoutput.png" alt="" /></center></span>
+									<span class="image"><img src="/images/E-commerce/Correlation coefficients.png" alt="" /></center></span>
 									 <center><figcaption><font size = "3"><b>Figure 2.</b> Correlation coefficients heatmap</figcaption></font></center>
 								<br/>
 								<p>The heatmap confirm that the variable <b>'Length of Membership'</b> has a strong relationship with the <b>'Year Amount Spent'</b> as its coefficient is 0.81. 
 									The variable <b>'Time on App'</b>'s correlation coefficient is 0.5 which is considered to be a strong positive relationship. 
 									<b>'Avg. Session length'</b> has a moderate positive relationship. On the other hand, unlike other variables 
-									<b>'Time on Website'</b> has a negative correlation coefficient. Since the value is nearly 0, this variable has almost no relationship to the target variable. 
-									There are several ways to evaluate a predictive model performance. For this project The Pareto Principle and 10-fold cv methods were used. 
-									<br/>
-									<br/>
+									<b>'Time on Website'</b> has a negative correlation coefficient. Since the value is nearly 0, this variable has almost no relationship to the target variable.</p>
+									<p>There are several ways to evaluate a predictive model performance. For this project The Pareto Principle and 10-fold cv methods were used.</p> 
+									<p>
 									1. The Pareto Principle :  It's also called 80-20 rules. The dataset will be split into 80% and 20%. 
 									80% of data will be used for training the model and 20% of data will be used for evaluation of model performance.</br>
 									2. K-fold cross validation : Split the dataset into k groups and select one group as a hold out(test set) and train the model on rest of groups(l-1 groups). 
 									Repeat the process 10 times to use all unique group as a test set. Then calcualte the average of the result of all iterations. </p>
-										 
+								
+								<h2><u>Part 2</u>　 Linear Regression Model</h2>
 								<script src="https://gist.github.com/DSpeanut/2a6d79a14772cf7b28ae261da909f3bd.js"></script>
 									 
 								<p>The data-set is split into 80% and 20%. Then model was trained and tested accordingly</p>
@@ -183,16 +186,99 @@
 
 								<br/>	
 								<p>The linear model is fitted on the train-data. Each variable has coefficients as it shown table 4.</p>
-									 
+								
+								The homoscedasticity was checked with the residual plot.
 
 
+								<script src="https://gist.github.com/DSpeanut/cf1b22aae743bc2bc6adf47c7ce57317.js"></script>
 
 
+								<center>
+									<span class="image"><img src="images/E-commerce/Residual plot.png" alt="" /></center></span>
+									 <center><figcaption><font size = "3"><b>Figure 3.</b> Residual plot</figcaption></font></center>
+								<p> Residual plot shows there is no particular pattern in the predicted values using the linear model. Therefore, Fitted linear regression model satisfy the homoscedasticity assumption</p>
+
+								<script src="https://gist.github.com/DSpeanut/4602abdfb774fbb43d660cdfae77fc80.js"></script>
+
+								To evaluate the performance, linear model was used to predict 'Year Amount Spent' based on the test data(x variables). 
+								Table 5 represent the performace result using both 'The Pareto Principle' and '10-fold cross-validation' methods.</p>
+								
+								<center>
+									<span class="image"><img src="images/E-commerce/comp.png" alt="" /></center></span>
+									 <center><figcaption><font size = "3"><b>Table 5.</b> Model performance on test data</figcaption></font></center>
+
+								
+								<script src="https://gist.github.com/DSpeanut/375a5e2ffd45bebbeb4d5691c7c066e1.js"></script>
+
+								<p>Since the linear model is built, I have tested the model to predict 'Yearly Spent Amount' for two new customers.
+
+								<blockquote> 
+									<b>Input</b><br/>
+									Customer 1 : 35,15,30,2 <br/>
+									Customer 2 : 40,20,20,4 <br/><br/>
+									
+									<b>Output</b><br/>
+									Customer1's　yearly purchase amount is approximately $568<br/>
+									Customer2's　yearly purchase amount is approximately $1013</blockquote>
+
+								<h2><u>Part 3</u>　 Logistic Regression Model</h2>
 
 
+								<p>In part 3, I would like to build a multiple logistic regression model to predict the customer class.
+								<ul><li>Independent variables : 'Avg. Session Length', 'Time on App', 'Time on Website','Length of Membership'</li>
+								<li>Dependent variable : 'Customer class(VIP, Regular)'</li></ul></p>
+								
+								Since 'year amount spent' was used to divide the customer class, it was not included in the independent variables.</p>
 
+								<script src="https://gist.github.com/DSpeanut/fc8e9eadd46f6e854eb7d44c0742ef6a.js"></script>
+								<p><center><span class="image"><img src="images/E-commerce/Classification.png" alt="" /></span></center>
+									<center><figcaption><font size = "3"><b>Table 6.</b> Assigning classification</figcaption></font></center></p>
+		
+								<p> The average yearly purchased amount by customer is $499.31. I simply divided the customer classes into 2 categories:</p>
+									<li>Class 1 : Customer who yearly spent amount is > $499</li>
+									<li>Class 0 : Customer who Yearly spent amount is < $499</li></p>
 
+								<p><center><span class="image"><img src="images/E-commerce/Correlation coefficients by customer class.png" alt="" /></span></center>
+									<center><figcaption><font size = "3"><b>Figure 4.</b> Paired plots by customer class</figcaption></font></center></p>
 
+								<p> The pairplot shows clear division between two different classe on the variables: 'Yearly Amount Spent', 'Length of Membership'. However, 'Time on App', 'Time on Website', and 'Avg. Session Length' variables did not seem to have a clear division line.</p>
+								<script src="https://gist.github.com/DSpeanut/f209123279d445aaf05820329eb3d22f.js"></script>
+								<p><center><span class="image"><img src="images/E-commerce/Logistic Regression Plots.png" alt="" /></center>
+									<center><figcaption><font size = "3"><b>Figure 5.</b> Logistic regression plots</figcaption></font></center></p>
+
+								<p>Using seabron package, the logistic regression graphs were plotted for all variables. 
+									Corresponding to the pairplot result, figure 5 shows that logistic regression were well fitted on all variables except 'Time on website'. 
+									Meaning the customers were not able to be divided by 2 classes using 'Time on website' variable.</p>
+								
+								<script src="https://gist.github.com/DSpeanut/bf2cad5fc84aed7e27e057e7030c43d3.js"></script>
+								
+								<p><center><span class="image"><img src="images/E-commerce/logistic result.png" alt="" /></center>
+									<center><figcaption><font size = "4"><b>Figure 6.</b> Logistic regression result</figcaption></font></center></p>
+								<p>The multiple logistic regression was trained and tested. The model has a 95% accuracy of classification. 
+									As it can be seen in confusion matrix, out of 125 customers 119 customers were correctly classified
+									(60 regular customers and 59 VIPs) and 6 customers were incorrectly classified.</p>
+								
+								<script src="https://gist.github.com/DSpeanut/8e880a6e3baee5a8eb84c44ebbbe5623.js"></script>
+
+								<p> As a last step, the multiple logistic regression model was used to predict customer's class with new data points. </p>
+			
+								<blockquote> 
+									<b>Input</b><br/>
+									New customer: 30, 15.265884, 35, 4.5 <br/>
+									
+									<b>Output</b><br/>
+									The new customer's yearly purchase amount is approximately $604<br/>
+									The customer is class VIP</blockquote>
+								
+
+								<center><b><font size = "10"> CONCLUSION </font></b></center>
+
+								<p>With this project, I successfully built multiple linear, logistic regression models to predict customer yearly spent amount and their customer class.
+									One interesting finding was that Time spent on app was important factor on customer purchase, wherease Time spent on website did not have a great impact.
+									This fact tells us that the company should focus on making a good quality and convinient application rather than the website.
+									Additionally, The company now can utilize these two models to identify target customers for various marketing promotions. 
+								</p><br/>
+									
 						</div>
 					</div>
 
