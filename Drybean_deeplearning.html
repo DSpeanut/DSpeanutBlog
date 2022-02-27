@@ -51,7 +51,7 @@
 							<h1>Multiclass classification and model comparison</h1>
 							<span class="image main"><img src="images/Drybean/Beans_post.png" alt="" /></span>
 							<p><h2>Multilclass classification and model comparison:<br/>
-								Part 1 : Multiclass classification/Parameter tuning for tree-based models.</h2>
+								Part 2 : Multiclass classification/Parameter tuning for Deep Neural Network models.</h2>
 							
 								The main goal of this project is to build the classification models using both tree-based and deep learning models to evaluate predictive model performance. 
 								The dataset used for this project is <b>Dry Bean Dataset</b> from <a href="https://archive.ics.uci.edu/ml/datasets/Dry+Bean+Dataset">UCI Machine Learning Repository</a>
@@ -104,13 +104,13 @@
 
 							
 							<p>Beginning of the modeling, pre-processing data was conducted in 4 steps.
-							<p>　Step 1. Checking missing values: The dataset had no missing values</p>
-							<p>　Step 2: One hot encoding: Changed the target variable ‘Class’ to a dummy variable.</p>
-							<p>　Step 3: Data type: Changed the data type from int to float</p>
-							<p>　Step 4: Normalization: All the values were normalized between -1 to 1</p>
+							<ul><li>　Step 1. Checking missing values: The dataset had no missing values</li>
+							<li>　Step 2: One hot encoding: Changed the target variable ‘Class’ to a dummy variable.</li>
+							<li>　Step 3: Data type: Changed the data type from int to float.</li>
+							<li>　Step 4: Normalization: All the values were normalized between -1 to 1.</li></ul>
 							<p>After the pre-processing, the dataset dimension was changed from (13611,1) to (13611,7).</p>
 
-							<h4>1. Comparison by the number of hidden units</h4>	
+							<h4>1) Comparison by the number of hidden units</h4>	
 
 							<p><center><span class="image fit"><img src="images/Drybean/testaccuracy_hiddenunitnumbers.png" alt="" /></span></center>
 								<center><figcaption><font size = "3"><b>Figure 8.</b> The test accuracy by the number of hidden units</figcaption></font></center></p>
@@ -120,7 +120,7 @@
 								The maximum test accuracy was from a hidden unit of 121. The higher hidden unit number might lead to the higher test accuracy,
 								 however, due to higher computation cost and the marginal difference between the accuracies, the optimal hidden unit was chosen between 30 to 70.</p>
 							
-							<h4>2. Comparison by the number of hidden layers</h4>	
+							<h4>2) Comparison by the number of hidden layers</h4>	
 
 							<p><center><span class="image"><img src="images/Drybean/hiddenlayers.jpg" alt="" /></span></center>
 								<center><figcaption><font size = "4"><b>Figure 9.</b> The training/validation loss(left) and accuracies(right) by the number of hidden layers </figcaption></font></center></p>
@@ -130,7 +130,7 @@
 								however, for validation accuracy they were very similar. When the test accuracy was compared by the different number of hidden units, model with two hidden layers generally had better test accuracies. 
 								Therefore, the hidden layer number was chosen to be 2 for the final model.  </p>
 
-							<h4>3. Comparison by activation functions</h4>	
+							<h4>3) Comparison by activation functions</h4>	
 
 							<p><center><span class="image fit"><img src="images/Drybean/activation.png" alt="" /></span></center>
 								<center><figcaption><font size = "4"><b>Figure 10.</b> The validation losses(left) and accuracies(right) by the activation functions</figcaption></font></center></p>
@@ -139,7 +139,7 @@
 								On the other hand, the validation accuracy graphs have very fluctuated. As additional verification, the test accuracy was compared for a range of hidden units 30 to 70(See table 7). 
 								The average test accuracy shows the highest for the Relu function followed by Tanh, Leaky, and Sigmoid functions. </p>
 							
-							<h4>4. Comparison by the batch-size</h4>	
+							<h4>4) Comparison by the batch-size</h4>	
 
 							<p><center><span class="image fit"><img src="images/Drybean/batchsize.png" alt="" /></span></center>
 								<center><figcaption><font size = "4"><b>Figure 10.</b> The validation/test losses and accuracies by batch-size</figcaption></font></center></p>
@@ -150,7 +150,7 @@
 								The validation loss chart shows when the number epoch increases all the model’s validation loss increases which indicate the overfitting. 
 								Considering the computational cost and predictive performance batch size 32 was chosen for the final model.</p>
 	
-							<h4>6. Comparison by the optimizer</h4>	
+							<h4>5) Comparison by the optimizer</h4>	
 
 							<p><center><span class="image fit"><img src="images/Drybean/optimizer.png" alt="" /></span></center>
 								<center><figcaption><font size = "4"><b>Figure 10.</b> The validation/test losses and accuracies by optimizers</figcaption></font></center></p>
@@ -165,7 +165,7 @@
 								Generally, when the epoch increases the test accuracy can also increase but it leads to overfitting. 
 								From this chart epoch, 60 was large enough to produce the result.</p>
 
-							<h4>7. Comparison by the Regularization</h4>	
+							<h4>6) Comparison by the Regularization</h4>	
 
 							<p><center><span class="image fit"><img src="images/Drybean/Dropout.png" alt="" /></span></center>
 								<center><figcaption><font size = "4"><b>Figure 11.</b> The train/validation losses(left) and validation accuracies(right) by regularization.</figcaption></font></center></p>
