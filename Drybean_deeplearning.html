@@ -1,0 +1,277 @@
+<!DOCTYPE HTML>
+<!--
+	Eunji Noh Portfolio
+	https://dspeanut.github.io/DSpeanutBlog/
+-->
+<html>
+	<head>
+		<title>Eunji Noh's Portfolio</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="index.html" class="logo">
+									<span class="symbol"><img src="images/Main logo/peanut logo.png" alt="" /></span><span class="title">EUNJI NOH</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="Rottentomatoes.html">Project 1: Movie Analaysis project</a></li>
+							<li><a href="E-commerce.html">Project 2: E-commerce customer modling project</a></li>
+							<li><a href="Drybean.html">Project 3: Multiclass classification and model comparison project</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Multiclass classification and model comparison</h1>
+							<span class="image main"><img src="images/Drybean/Beans_post.png" alt="" /></span>
+							<p><h2>Multilclass classification and model comparison:<br/>
+								Part 1 : Multiclass classification/Parameter tuning for tree-based models.</h2>
+							
+								The main goal of this project is to build the classification models using both tree-based and deep learning models to evaluate predictive model performance. 
+								The dataset used for this project is <b>Dry Bean Dataset</b> from <a href="https://archive.ics.uci.edu/ml/datasets/Dry+Bean+Dataset">UCI Machine Learning Repository</a>
+								<p><b>The project is divided into 2 posts Part 1 and Part 2.</b><br/></p>
+								
+								<ul><li>Part 1 : Multiclass classification for tree-based models(Modeling, Parameter tuning, Comparison)</li></ul>
+								<ul><li>Part 2 : Multiclass classification for Deep Neural Network models(Modeling, Parameter tuning, Comparison, Conclusion)</li></ul>
+								
+
+								From this analysis, I would like to explore and find the answers to below questions:
+								<br/>
+								   <ol><li>Building a model for multiclass classification</li>
+									   <li>Does deep learning model perform better than tree-based model?</li>
+									   <li>Which model should be used?</li>
+									</ol><hr /></p>
+
+							<p><h3>Project skill goals</h3>
+							<ul><li>Explaroty Data Analysis</li>
+							<li>Data Wrangling</li>
+							<li>Data Visualization</li>
+							<li>Data Modeleling(Decision tree and Deep learning models)
+							<li>Hyperparameter tuning</li></ul></p>
+							
+							
+							<p><h3>Used tools</h3>
+								<ul><li>R: Skimr, Tree, Caret, RandomForest, Gbm, dplyr, ggplot2, GGally</li>
+								<li>Python : Numpy, Pandas, Matplotlib, Tensorflow, Sklearn</li>
+							<hr />
+							<br/>
+								
+
+							<h2><u>Part 2</u>　 Data Modeling</h2>
+
+							<h3>II. Deep Neural Network Models</h3>	
+
+							<h3>1. Hyperparameter Tuning</h3>
+
+							<p>Deep learning is a type of machine learning technique that learns the pattern of the unstructured data and learns the process to find the function to solve either ‘regression’ or ‘classification’ problems. 
+							The deep learning model is consisting of a node layer, units, weights. Depending on the neural network type the network can be divided into single-layer perceptron(SLP) or multi-layer perceptron(MLP). 
+							The idea of a neural network came from the human brain. 
+							These neural network components are functioning similarly to the human brain and can be trained like any other ML algorithm.</p>
+							<p>There are various neural network types which can be chosen depending on type of problem and the dataset. 
+							Most basic neural network is Artificial neural network (ANN) and Recurrent Neural Network (RNN) is often used for music composition, human action recognition. 
+							Long/Short-Term Memory (LSTM) is used for speech recognition or machine translation. 
+							For this project, ANN model was chosen considering the data type and the size. The final model will be tuned by testing various hyper-parameters. 
+							7 hyper-parameters were tested to choose the final model: 
+							1) The number of hidden units, 2) The number of hidden layers, 3) The number of epochs, 4) The number of batch-size, 
+							5) Activation functions, 6) Optimizers. 7) Regularization. 
+							While one parameter is being tested other parameters were fixed as same for accurate comparison.</p>
+
+							
+							<p>Beginning of the modeling, pre-processing data was conducted in 4 steps.
+							<p>　Step 1. Checking missing values: The dataset had no missing values</p>
+							<p>　Step 2: One hot encoding: Changed the target variable ‘Class’ to a dummy variable.</p>
+							<p>　Step 3: Data type: Changed the data type from int to float</p>
+							<p>　Step 4: Normalization: All the values were normalized between -1 to 1</p>
+							<p>After the pre-processing, the dataset dimension was changed from (13611,1) to (13611,7).</p>
+
+							<h4>1. Comparison by the number of hidden units</h4>	
+
+							<p><center><span class="image fit"><img src="images/Drybean/testaccuracy_hiddenunitnumbers.png" alt="" /></span></center>
+								<center><figcaption><font size = "3"><b>Figure 8.</b> The test accuracy by the number of hidden units</figcaption></font></center></p>
+							
+							<p>The test for the number of hidden units was tested and plotted their test accuracy as figure 8. 
+								Although the graph fluctuated as the number of hidden units increased, generally when there are more hidden units in the model it produced higher test accuracy. 
+								The maximum test accuracy was from a hidden unit of 121. The higher hidden unit number might lead to the higher test accuracy,
+								 however, due to higher computation cost and the marginal difference between the accuracies, the optimal hidden unit was chosen between 30 to 70.</p>
+							
+							<h4>2. Comparison by the number of hidden layers</h4>	
+
+							<p><center><span class="image"><img src="images/Drybean/hiddenlayers.jpg" alt="" /></span></center>
+								<center><figcaption><font size = "4"><b>Figure 9.</b> The training/validation loss(left) and accuracies(right) by the number of hidden layers </figcaption></font></center></p>
+							<p>Between  the  one  hidden  layer  and  two  hidden  layers,  no  significant  difference  was  shown  in Training/Validation loss (See figure 9 left). 
+								Both test models training/validation losses rapidly decreased and remained the same level of 0.2. 
+								In terms of Training accuracy, the model with two hidden layers appeared to perform slightly better than one layer model, 
+								however, for validation accuracy they were very similar. When the test accuracy was compared by the different number of hidden units, model with two hidden layers generally had better test accuracies. 
+								Therefore, the hidden layer number was chosen to be 2 for the final model.  </p>
+
+							<h4>3. Comparison by activation functions</h4>	
+
+							<p><center><span class="image fit"><img src="images/Drybean/activation.png" alt="" /></span></center>
+								<center><figcaption><font size = "4"><b>Figure 10.</b> The validation losses(left) and accuracies(right) by the activation functions</figcaption></font></center></p>
+							<p>The comparison between the activation functions was conducted to identify the best activation function for this modeling. 
+								As it can be seen in figure 10, apart from sigmoid function all the others performed similarly. 
+								On the other hand, the validation accuracy graphs have very fluctuated. As additional verification, the test accuracy was compared for a range of hidden units 30 to 70(See table 7). 
+								The average test accuracy shows the highest for the Relu function followed by Tanh, Leaky, and Sigmoid functions. </p>
+							
+							<h4>4. Comparison by the batch-size</h4>	
+
+							<p><center><span class="image fit"><img src="images/Drybean/batchsize.png" alt="" /></span></center>
+								<center><figcaption><font size = "4"><b>Figure 10.</b> The validation/test losses and accuracies by batch-size</figcaption></font></center></p>
+							<p>During modeling, batch size can be set according to the dataset, but often 32 or 64 are recommended to use. 
+								The performance comparison on different batch-size illustrated in figure 11. 
+								It shows the smaller batch has a higher test accuracy. A smaller batch size leads to faster convergence. 
+								However, If the batch size is too small, the convergence generally is slower and the model can overfit. 
+								The validation loss chart shows when the number epoch increases all the model’s validation loss increases which indicate the overfitting. 
+								Considering the computational cost and predictive performance batch size 32 was chosen for the final model.</p>
+	
+							<h4>6. Comparison by the optimizer</h4>	
+
+							<p><center><span class="image fit"><img src="images/Drybean/optimizer.png" alt="" /></span></center>
+								<center><figcaption><font size = "4"><b>Figure 10.</b> The validation/test losses and accuracies by optimizers</figcaption></font></center></p>
+							<p>The optimizer comparison shows Adam and RMSprop had the lowest validation loss and generally high validation accuracy. 
+								However, in terms of test accuracy, the Momentum optimizer was performing better than other optimizers in both test loss and test accuracy.
+								Additionally, as it can be seen in figure 12 the epochs between 0 to 100 show some clarity of after certain epochs the performance remains the same. 
+								Generally, when the epoch increases the test accuracy can also increase but it leads to overfitting. 
+								From this chart epoch, 60 was large enough to produce the result.</p>
+							<p>The optimizer comparison shows Adam and RMSprop had the lowest validation loss and generally high validation accuracy. 
+								However, in terms of test accuracy, the Momentum optimizer was performing better than other optimizers in both test loss and test accuracy.
+								Additionally, as it can be seen in figure 12 the epochs between 0 to 100 show some clarity of after certain epochs the performance remains the same. 
+								Generally, when the epoch increases the test accuracy can also increase but it leads to overfitting. 
+								From this chart epoch, 60 was large enough to produce the result.</p>
+
+							<h4>7. Comparison by the Regularization</h4>	
+
+							<p><center><span class="image fit"><img src="images/Drybean/Dropout.png" alt="" /></span></center>
+								<center><figcaption><font size = "4"><b>Figure 11.</b> The train/validation losses(left) and validation accuracies(right) by regularization.</figcaption></font></center></p>
+							<p>The Drop-out layer is known as a regularization method which is useful for preventing overfitting. 
+								The model with drop-out and without drop-out was tested on a drop-out value of 0.5. 
+								As it can be seen in figure 13 when the epoch increases the train/validation loss for the model without drop-out increases due to overfitting. 
+								However, the model with a drop-out layer steadily decreases the validation loss. 
+								For the validation accuracy, both models show a similar result, however, for the test accuracy the model with dropout was 93.13% 
+								and without dropout was 92.24% which is nearly a 1% difference.</p>
+								
+							<h3>2. Optimal deep learning models performance</h3>
+							
+							<p> After the hyperparameter tuning, the optimal model was built with the result of all the best parameter values chosen. As a result, the validation accuracy was 91.92% and test accuracy was 92.87%. 
+								However, during the parameter tuning, the test accuracy was higher than the optimal model.
+								Different combinations of parameters can affect the test accuracy, therefore, as a further step, 
+								the hyper- parameter tuner was used to identify the automated parameter tuning values. 
+								The Keras tuner(Random Search, Hyper-band) was conducted to find the best combination of parameters. 
+								Tuner chose the best hyper- parameters as (160 hidden units, 2 hidden layers, tanh activation, drop-out(0.5), 256 batch-size, Adam optimizer, 0.001 learning rate) 
+								and the test accuracy was 93.20%.</p>
+
+							<center><b><font size = "10"> CONCLUSION </font></b></center><br/>
+
+							<h3>3. Comparison on Tree-based models and Deep Neural Network models</h3>
+							<p><center><span class="image"><img src="images/Drybean/totalmodels.png" alt="" /></span></center>
+								<center><figcaption><font size = "4"><b>Table 8.</b> Train/test accuracies comparison between tree-based models and deep-learning models</figcaption></font></center></p>
+							<p>The comparison between tree-based models and Deep Neural Network models was conducted based on the training accuracy and test accuracy. 
+								Among tree-based models, the boosting model was the best and among DNN models, the model tuned with tuner had a higher test accuracy. 
+								Between the tree-based and DNN model, although the difference is merely less than 1%, the DNN model had better test accuracy. 
+								Most importantly, there was a significant increase in test accuracy from the general decision tree to the DNN model through the tuning process.</p>
+							<p><b>Result</b><br/>
+								<ol><li>Both tree-based models and DNN models have good performances on the Dry-bean dataset (Over 90%).</li>
+								<li>Among tree-based models, Boosting was the best model(Test accuracy: 92.84%)</li>
+								<li>Among the DNN model, the model tuned with Keras tuner was the best model(Test accuracy: 93.20%)</li>
+								<li>Between the two models, DNN model performance is higher. </li>
+								<li>The difference between the two models' test accuracies was merely 1%</li></ol>
+							
+							<p><b>Executive Summary</b><br/>
+							<p>Given the dry-bean dataset, the experiment to compare two different types of data models’ performances was conducted between 1) Tree-based model, 2) Deep Neural Network model. 
+								Within the same category, numerous models were compared based on model test accuracy, and the final result is seen in table 8.
+								The test accuracy represents how accurately the model can predict the dry-bean class when new data is given. 
+								The test accuracies of the top 2 selected models were 92.84% (Boosting model), and 93.20% (Tuner DNN model).
+								This means when using a boosting model, we can accurately classify 92 dry beans out of 100 new data points, whereas a tuner DNN model can accurately classify 93 dry beans. A seemingly small difference of 1 case out of 100 is observed here. 
+								However, when the data-size increases, the difference can be significant.</p>
+
+								<p><center><span class="image"><img src="images/Drybean/modeladvantages.png" alt="" /></span></center>
+									<center><figcaption><font size = "4"><b>Table 9.</b> Advantages/Disadvantages between tree-based model and DNN model</figcaption></font></center></p>
+
+								<p>Two data models are structured differently, therefore both have advantages and disadvantages, as described in table 9. 
+									Interpreting results from the tree-based model is easy, whereas the deep learning models’ learning process is difficult to understand,
+									and is extremely expensive to train the model. However, the deep learning model has great potential to improve accuracy by testing different methodologies and can adapt well to new changes in the future.</p>
+								<p><b>Conclusion</b>: The DNN model has great potential, however, the tree-based model can be recommended considering the high computational cost of the DNN model, and marginal differences between the two models test accuracies. 
+									The current data is shown to derive from numerical values extracted from the images. 
+									If future changes in business dictate that ‘image’ data is used directly to train the model or prioritize the improvement of test accuracies, 
+									then the DNN model will prove to be the better option to use. </p>
+						</div>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<section>
+								<h2>Get in touch</h2>
+								<form method="post" action="#">
+									<div class="fields">
+										<div class="field half">
+											<input type="text" name="name" id="name" placeholder="Name" />
+										</div>
+										<div class="field half">
+											<input type="email" name="email" id="email" placeholder="Email" />
+										</div>
+										<div class="field">
+											<textarea name="message" id="message" placeholder="Message"></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send" class="primary" /></li>
+									</ul>
+								</form>
+							</section>
+							<section>
+								<h2>Follow</h2>
+								<ul class="icons">
+									<li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-dribbble"><span class="label">Dribbble</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+									<li><a href="#" class="icon brands style2 fa-500px"><span class="label">500px</span></a></li>
+									<li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
+									<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+								</ul>
+							</section>
+							<ul class="copyright">
+								<li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
