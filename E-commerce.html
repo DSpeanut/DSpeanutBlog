@@ -50,20 +50,20 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<h1>E-commerce customer data analysis and modeling</h1>
-							<span class="image main"><img src="images/E-commerce/[Resized]e-commerce.png" alt="" /></span>
+							<h1>E-commerce customer data analysis and predictive modeling</h1>
+							<span class="image main"><img src="images/E-commerce/E-commerce_post.png" alt="" /></span>
 							<p><h2>Linear/Logistic regression modeling project</h2></p>
 							
 							<center><p><b>Full code available <a href="https://github.com/DSpeanut/Projects/blob/main/Linear_regression_Ecommece.ipynb"> here </a></b></center></p>
 
-							<p>The main goal of this project is to perform a predictive modeling. 
-							Given the customer dataset, I will build the <b>Linear Regression</b> and <b>Logistic Regression</b> models that predict yearl 
-							spent amount and the class of the new customer data. 
+							<p>&nbsp;The main goal of this project is to build predictive models to estimate customers' purchase amount and to classify customers as either VIP or Regular groups for target marketing. 
+							The two predictive models built on this project are <b>Linear Regression</b> and <b>Logistic Regression</b> models. Dataset is Linear Regression E-commerce Dataset
+							sourced from <a href = "https://www.kaggle.com/kolawale/focusing-on-mobile-app-or-website">Kaggle</a>
 							<br/><br/>
-							From this analysis, I would like to explore and find the answers to below questions:
+							From this project, I would like to explore and find the answers to below questions:
 							<br/>
-								<ol><li>How much the new customer is likely to spend this year?</li>
-									<li>What customer class the new customer will most liketly be?</li></ol><hr /></p>
+								<ol><li>How much the new customer is likely to spend this year? - Linear Regression</li>
+									<li>What customer class the new customer belongs? - Logistic Regression</li></ol><hr /></p>
 
 							<p><h3>Project skill goals</h3>
 							<ul><li>Explaroty Data Analysis</li>
@@ -83,8 +83,8 @@
 
 
 							<h2><u>Part 1</u>　 Exploratory Data Analysis</h2>
-							<p><script src="https://gist.github.com/DSpeanut/7001ff88a63f4d831de849498dfcbd82.js"></script></p>
-							<p>First of all, all the necessary packages are loaded into python. The data is loaded and let's have a first look at the data.</p>
+							
+							<p>&nbsp;First of all, let's have a look at the data description.</p>
 
 								<center><span class="table-wrapper">
 									<table class="alt" style="width: 800px">
@@ -131,35 +131,30 @@
 									</table>
 								<caption><font size = "3"><b>Table 1.</b> Data Description</font></caption></center></span>
 								<br/>
-								<p>The dataset is the customer data from e-commerce website and it contains customer purchasing and activity history information. 
-									The dataframe consists of total 8 variables (3 Categorical variables and 5 Numerical variables). 
-									The data has total 500 observations.</p>
+								<p>&nbsp;The dataset is the customer data from an e-commerce website and it contains customer purchasing and activity history information.  
+									The data frame consists of a total of 8 variables (3 Categorical variables and 5 Numerical variables) and it has total of 500 observations.</p>
 								<p><center><span class="image"><img src="images/E-commerce/[Resized]originaldf.png" alt="" /></span></center>
 									<center><figcaption><font size = "3"><b>Table 2.</b> First 5 rows of the dataset</figcaption></font></center></p>
 		
-								<p>  Table 2 shows some statistical values of each numerican variable. 
-									On average customers spent 33 minutes per each session and people tend to stay longer on the website compared to the application. 
-									The customer spent minimum $256 upto $765 and $499 on average.
-									The email and address are not included in the variable selection for the modeling. 
-									However, I wanted to see if ‘Avatar’ information might have some impact on the customer purchase trend.
-								<br/>
-								 The email and address are not included in the variable selection for the modeling. 
-								However, I wanted to see if ‘Avatar’ information might have some impact on the customer purchase trend.</p>
+								<p>&nbsp;Table 2 shows some statistical values of each numerical variable.
+									On average, customers spent 33 minutes per session and they tend to stay longer on the website compared to the application. 
+									The customer spent on average $499 a year, a minimum of $256 up to $765. 
+									The email and address don't have a direct impact on customer purchase amount, therefore there were excluded in feature selection.  
+									&nbsp;However, I wanted to check if the ‘Avatar’ variable might have some impact on the customer purchase trend.
+								</p>
 								<p><center><span class="image"><img src="images/E-commerce/avatar.png" alt="" /></center>
-									<center><figcaption><font size = "3"><b>Table 3.</b> The correlation coefficients of variable 'Avatar'</figcaption></font></center></p>
-								<p>The table 3 shows that the avatar features have insignificant relationships with the ‘Yearly Amount Spent’ variable. 
-									Therefore, this variable is not included in the modeling variables.</p> 
-
+									<center><figcaption><font size = "3"><b>Table 3.</b> The correlation coefficients of 'Avatar' variable</figcaption></font></center></p>
+								<p>&nbsp; Table 3 explains that the avatar feature has an insignificant relationship with the ‘Yearly Amount Spent’ variable as their correlation coefficients were nearly 0. 
+									Therefore, this variable was also excluded for feature selection.</p>								
 								<p><center><span class="image"><img src="images/E-commerce/[Resized]pairplot.png" alt="" /></center>
 								<center><figcaption><font size = "3"><b>Figure 1.</b> Paired plots of numerical variables</figcaption></font></center></p>
-								<p> The paired plot indicates all numerical variables follow a normal distribution. 
-									From the plots it looks like the variable ‘Length of membership’ is highly correlated with the target variable ‘Year Amount Spent’.
-									 Also, ‘Time on App’ looks slightly correlated. </p>
+								<p> &nbsp; The paired plot indicates all numerical variables follow the normal distribution. 
+									As it can be seen in the paired plots, the variable ‘Length of membership’ is highly correlated with the target variable ‘Year Amount Spent’. Also, ‘Time on App’ looks slightly correlated to the target variable.</p>
 									
 								<script src="https://gist.github.com/DSpeanut/4c9c8bcf5c858aaabdcb67a27ff72441.js"></script>
-								<p>To confirm if all numerical variables follow normal distributions, I have conducted **Shapiro-Wilk Test** for normality test.
-									 All test results did not reject H0, therefore all numerical variables follow normal distributions.
-									 The columns 'Email', 'Address', 'Avatar' are removed, then I checked the correlation coefficients of variables using seaborn's heatmap.</p>
+								<p> &nbsp; In linear regression not all variables need to pass the normality test. However I wanted to check if the independent variables are normally distributed by conducting <b>Shapiro-Wilk Test</b>.
+									 The test results did not reject H0, therefore all numerical variables do follow normal distributions.</p>
+								<p>&nbsp;The columns 'Email', 'Address', 'Avatar' are now removed, I checked the correlation coefficients for the rest of variables using seaborn's heatmap.</p>
 									 
 								
 								<script src="https://gist.github.com/DSpeanut/0817b4339673352becf86644223ed832.js"></script>
@@ -168,29 +163,29 @@
 									<span class="image"><img src="images/E-commerce/Correlation coefficients.png" alt="" /></center></span>
 									 <center><figcaption><font size = "3"><b>Figure 2.</b> Correlation coefficients heatmap</figcaption></font></center>
 								<br/>
-								<p>The heatmap confirm that the variable <b>'Length of Membership'</b> has a strong relationship with the <b>'Year Amount Spent'</b> as its coefficient is 0.81. 
-									The variable <b>'Time on App'</b>'s correlation coefficient is 0.5 which is considered to be a strong positive relationship. 
-									<b>'Avg. Session length'</b> has a moderate positive relationship. On the other hand, unlike other variables 
-									<b>'Time on Website'</b> has a negative correlation coefficient. Since the value is nearly 0, this variable has almost no relationship to the target variable.</p>
-									<p>There are several ways to evaluate a predictive model performance. For this project The Pareto Principle and 10-fold cv methods were used.</p> 
+								<p>&nbsp;The heatmap confirms that the variable <b>Length of Membership</b> has a strong relationship with the <b>Year Amount Spent</b> as its coefficient is 0.81. 
+									The variable <b>Time on App</b>'s correlation coefficient is 0.5 which is considered to be a strong positive relationship. 
+									<b>Avg. Session length</b> has a moderate positive relationship as its correlation of 0.36. On the other hand, unlike other variables 
+									<b>Time on Website</b> has a negative correlation coefficient. Since the value is nearly 0, it can be said this variable has almost no relationship to the target variable.</p>
+									<p>&nbsp;Since we have finished the brief Exploratory Data Analaysis, let's move on to the modeling part.
+										There are several ways to evaluate a predictive model performance. For this project The Pareto Principle and 10-fold cv methods were used.</p> 
 									<p>
-									1. The Pareto Principle :  It's also called 80-20 rules. The dataset will be split into 80% and 20%. 
+									&emsp;1. <b>The Pareto Principle</b> :  It's also called 80-20 rules. The dataset will be split into 80% and 20%. 
 									80% of data will be used for training the model and 20% of data will be used for evaluation of model performance.</br>
-									2. K-fold cross validation : Split the dataset into k groups and select one group as a hold out(test set) and train the model on rest of groups(l-1 groups). 
+									&emsp;2. <b>K-fold cross validation</b> : Split the dataset into k groups and select one group as a hold out(test set) and train the model on rest of groups(l-1 groups). 
 									Repeat the process 10 times to use all unique group as a test set. Then calcualte the average of the result of all iterations. </p>
 								
 								<h2><u>Part 2</u>　 Linear Regression Model</h2>
 								<script src="https://gist.github.com/DSpeanut/2a6d79a14772cf7b28ae261da909f3bd.js"></script>
 									 
-								<p>The data-set is split into 80% and 20%. Then model was trained and tested accordingly</p>
+								<p>&nbsp;As the first step, the data-set is split into 80% and 20% according to the Pareto principle, the model was trained and tested on split data afterwards.</p>
 								<center>
 									<span class="image"><img src="images/E-commerce/linearresult.png" alt="" /></center></span>
-									 <center><figcaption><font size = "3"><b>Table 4.</b> The correlation coefficients of variable 'Avatar'</figcaption></font></center>
+									 <center><figcaption><font size = "3"><b>Table 4.</b> The linear model's coefficients and intercept</figcaption></font></center>
 
 								<br/>	
-								<p>The linear model is fitted on the train-data. Each variable has coefficients as it shown table 4.</p>
-								
-								The homoscedasticity was checked with the residual plot.
+								<p>&nbsp; The linear model is fitted on the train-data. Each variables' coefficient and intercept value are described in table 4.
+									The homoscedasticity was also conducted with the residual plot.</p>
 
 
 								<script src="https://gist.github.com/DSpeanut/cf1b22aae743bc2bc6adf47c7ce57317.js"></script>
@@ -198,72 +193,92 @@
 
 								<center>
 									<span class="image"><img src="images/E-commerce/Residual plot.png" alt="" /></center></span>
-									 <center><figcaption><font size = "3"><b>Figure 3.</b> Residual plot</figcaption></font></center>
-								<p> Residual plot shows there is no particular pattern in the predicted values using the linear model. Therefore, Fitted linear regression model satisfy the homoscedasticity assumption</p>
+									 <center><figcaption><font size = "3"><b>Figure 3.</b> The residual plot</figcaption></font></center>
+								<p>&nbsp; The residual plot shows there is no particular pattern in the predicted values. Therefore, the Fitted linear regression model satisfies the homoscedasticity assumption.</p>
 
 								<script src="https://gist.github.com/DSpeanut/4602abdfb774fbb43d660cdfae77fc80.js"></script>
 
-								To evaluate the performance, linear model was used to predict 'Year Amount Spent' based on the test data(x variables). 
-								Table 5 represent the performace result using both 'The Pareto Principle' and '10-fold cross-validation' methods.</p>
+								<p>&nbsp;The linear regression model was used on test-data to predict <b>Yearly Amount Spent</b> values then compared the predicted values and real values.</p>
 								
 								<center>
 									<span class="image"><img src="images/E-commerce/comp.png" alt="" /></center></span>
-									 <center><figcaption><font size = "3"><b>Table 5.</b> Model performance on test data</figcaption></font></center>
+									 <center><figcaption><font size = "3"><b>Table 5.</b> Model performance on test data</figcaption></font></center> <br/>
+								<p>&nbsp;<b>Mean Squared Error(MSE)</b> is a measure of the difference between fitted values and real values. 
+									The distance between these two values is measured from the data point vertically to the fitted regression line. 
+									This distance is also called 'the error' and MSE is calculated as the average of the squared value.</p>
+								<p>&nbsp;<b>R-squared</b> (also called R2) is a statistical measurement represents the proportion of the variance for a dependent variable can be explained by an independent variable or variables.
+									It is also known as the coefficient of determination. The R-squared value can tell us how well the model can explain the dataset, often a higher R-squared value is considered as a good fit of the model.
+									However, a very high r-squared value can be also an indication of a multicolinearity issue.</p>  
 
-								
+								<p>Table 5 represent the MSE and R2 results using both 'The Pareto Principle' and '10-fold cross-validation' methods.
+									We can see that 10-fold cross validation model has higher r-squared and lower MSE value. 
+								</p>
+							
+								<center>
+									<span class="image"><img src="images/E-commerce/vif_test.png" alt="" /></center></span>
+									 <center><figcaption><font size = "3"><b>Table 6.</b> VIF test</figcaption></font></center> <br/>
+
+								<p>&nbsp;Since our R-squared value was over 0.9, I wanted to check the VIF values. 
+								<b>Variance inflation factor (VIF)</b> is a measure of the amount of multicollinearity in a set of multiple regression variables. </p>
+								<P>&nbsp;As we can see in table 6, the variable Avg. Session Length and Time on Website/Time on App are highly correlated Which can be problematic. 
+									I can remove one of these variables to fix the issue, but for now, we will just ignore it and move forward since our goal is only for the prediction.</P>
+
+
 								<script src="https://gist.github.com/DSpeanut/375a5e2ffd45bebbeb4d5691c7c066e1.js"></script>
 
-								<p>Since the linear model is built, I have tested the model to predict 'Yearly Spent Amount' for two new customers.
+								<p>&nbsp;Now the linear model is built, I have tested the model to predict 'Yearly Spent Amount' for two new customers.
 
 								<blockquote> 
 									<b>Input</b><br/>
-									Customer 1 : 35,15,30,2 <br/>
-									Customer 2 : 40,20,20,4 <br/><br/>
+									Customer 1 : 35, 15, 30, 2 <br/>
+									Customer 2 : 40, 20, 20, 4 <br/><br/>
 									
 									<b>Output</b><br/>
 									Customer1's　yearly purchase amount is approximately $568<br/>
 									Customer2's　yearly purchase amount is approximately $1013</blockquote>
+								
+									<h2><u>Part 3</u>　 Logistic Regression Model</h2>
 
-								<h2><u>Part 3</u>　 Logistic Regression Model</h2>
 
-
-								<p>In part 3, I would like to build a multiple logistic regression model to predict the customer class.
+								<p>&nbsp;In part 3, I would like to build a multiple logistic regression model to predict the customer class.
 								<ul><li>Independent variables : 'Avg. Session Length', 'Time on App', 'Time on Website','Length of Membership'</li>
 								<li>Dependent variable : 'Customer class(VIP, Regular)'</li></ul></p>
 								
-								Since 'year amount spent' was used to divide the customer class, it was not included in the independent variables.</p>
+								<p>&nbsp;Since 'year amount spent' was used to divide the customer class, it was excluded in the independent variables.</p>
 
 								<script src="https://gist.github.com/DSpeanut/fc8e9eadd46f6e854eb7d44c0742ef6a.js"></script>
 								<p><center><span class="image"><img src="images/E-commerce/Classification.png" alt="" /></span></center>
-									<center><figcaption><font size = "3"><b>Table 6.</b> Assigning classification</figcaption></font></center></p>
+									<center><figcaption><font size = "3"><b>Table 7.</b> Assigning customer class</figcaption></font></center></p>
 		
-								<p> The average yearly purchased amount by customer is $499.31. I simply divided the customer classes into 2 categories:</p>
-									<li>Class 1 : Customer who yearly spent amount is > $499</li>
-									<li>Class 0 : Customer who Yearly spent amount is < $499</li></p>
+								<p>&nbsp;The average yearly purchased amount by customer is $499.31 and I used this value to divide the customer classes into 2 categories:</p>
+									<li>Class 1 : Customer who yearly spent amount is more than $499</li>
+									<li>Class 0 : Customer who Yearly spent amount is less than $499</li></p><br/>
+
 
 								<p><center><span class="image"><img src="images/E-commerce/Correlation coefficients by customer class.png" alt="" /></span></center>
 									<center><figcaption><font size = "3"><b>Figure 4.</b> Paired plots by customer class</figcaption></font></center></p>
 
-								<p> The pairplot shows clear division between two different classe on the variables: 'Yearly Amount Spent', 'Length of Membership'. However, 'Time on App', 'Time on Website', and 'Avg. Session Length' variables did not seem to have a clear division line.</p>
+								<p>&nbsp; The pair plot shows a clear division between two different classes on the variables: 'Yearly Amount Spent', 'Length of Membership'. However, 'Time on App', 'Time on Website', 
+									and 'Avg. Session Length' variables did not seem to have a clear dividing line.</p>
 								<script src="https://gist.github.com/DSpeanut/f209123279d445aaf05820329eb3d22f.js"></script>
 								<p><center><span class="image"><img src="images/E-commerce/Logistic Regression Plots.png" alt="" /></center>
 									<center><figcaption><font size = "3"><b>Figure 5.</b> Logistic regression plots</figcaption></font></center></p>
 
-								<p>Using seabron package, the logistic regression graphs were plotted for all variables. 
-									Corresponding to the pairplot result, figure 5 shows that logistic regression were well fitted on all variables except 'Time on website'. 
-									Meaning the customers were not able to be divided by 2 classes using 'Time on website' variable.</p>
+								<p>&nbsp; Using the seaborn package, the logistic regression graphs were plotted for all variables. 
+									Corresponding to the pair plot result, figure 5 shows that logistic regression was well fitted on all variables except 'Time on Website'. 
+									Meaning the customers were not able to be divided into 2 classes using the 'Time on Website' variable.</p>
 								
 								<script src="https://gist.github.com/DSpeanut/bf2cad5fc84aed7e27e057e7030c43d3.js"></script>
 								
 								<p><center><span class="image"><img src="images/E-commerce/logistic result.png" alt="" /></center>
 									<center><figcaption><font size = "4"><b>Figure 6.</b> Logistic regression result</figcaption></font></center></p>
-								<p>The multiple logistic regression was trained and tested. The model has a 95% accuracy of classification. 
+								<p>&nbsp;The multiple logistic regression was trained and tested. The model has a 95% accuracy of classification. 
 									As it can be seen in confusion matrix, out of 125 customers 119 customers were correctly classified
 									(60 regular customers and 59 VIPs) and 6 customers were incorrectly classified.</p>
 								
 								<script src="https://gist.github.com/DSpeanut/8e880a6e3baee5a8eb84c44ebbbe5623.js"></script>
 
-								<p> As a last step, the multiple logistic regression model was used to predict customer's class with new data points. </p>
+								<p>&nbsp;As a last step, the multiple logistic regression model was used to predict customer's class with new data points. </p>
 			
 								<blockquote> 
 									<b>Input</b><br/>
@@ -276,10 +291,10 @@
 
 								<center><b><font size = "10"> CONCLUSION </font></b></center>
 
-								<p>With this project, I successfully built multiple linear, logistic regression models to predict customer yearly spent amount and their customer class.
-									One interesting finding was that Time spent on app was important factor on customer purchase, wherease Time spent on website did not have a great impact.
-									This fact tells us that the company should focus on making a good quality and convinient application rather than the website.
-									Additionally, The company now can utilize these two models to identify target customers for various marketing promotions. 
+								<p>&nbsp;With this project, I successfully built multiple linear, logistic regression models to predict customer yearly spent amount and their customer class. 
+									One interesting finding was that Time spent on the app was an important factor in customer purchase, whereas Time spent on the website did not have a great impact.
+									This fact tells us that the company should putting more resources in developing good-quality and convenient application rather than the website. 
+									The company now can utilize these two models to identify target customers for various marketing promotions.</p>
 								</p><br/>
 									
 						</div>
