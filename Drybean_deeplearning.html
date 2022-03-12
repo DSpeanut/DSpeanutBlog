@@ -58,7 +58,7 @@
 							<p><h2>Multiclass classification and model comparison:<br/>
 								Part 2 : Multiclass classification/Parameter tuning for Deep Neural Network models.</h2>
 							
-								The main goal of this project is to build the classification models using both tree-based and deep learning models to evaluate predictive model performance. 
+								The main goal of this project is to build classification models using both tree-based and deep learning models to evaluate predictive model performance. 
 								The dataset used for this project is <b>Dry Bean Dataset</b> from <a href="https://archive.ics.uci.edu/ml/datasets/Dry+Bean+Dataset">UCI Machine Learning Repository</a>
 								<p><b>The project is divided into 2 posts Part 1 and Part 2.</b><br/></p>
 								
@@ -69,14 +69,14 @@
 								From this analysis, I would like to explore and find the answers to below questions:
 								<br/>
 								   <ol><li>Building a model for multiclass classification</li>
-									   <li>Does deep learning model perform better than tree-based model?</li>
+									   <li>Does a deep learning model perform better than a tree-based model?</li>
 									   <li>Which model should be used?</li>
 									</ol><hr /></p>
 
 							<p><h3>Project skill goals</h3>
 							<ul><li>Exploratory Data Analysis</li>
 							<li>Data Wrangling</li>
-							<li>Data Visualisation</li>
+							<li>Data Visualization</li>
 							<li>Data Modelling(Decision tree and Deep learning models)
 							<li>Hyperparameter tuning</li></ul></p>
 							
@@ -99,16 +99,16 @@
 							The idea of a neural network came from the human brain. 
 							These neural network components are functioning similarly to the human brain and can be trained like any other ML algorithm.</p>
 							<p>There are various neural network types which can be chosen depending on type of problem and the dataset. 
-							Most basic neural network is Artificial neural network (ANN) and Recurrent Neural Network (RNN) is often used for music composition, human action recognition. 
+							The most basic neural network is the Artificial Neural Network (ANN) and The Recurrent Neural Network (RNN) which is often used for music composition and human action recognition. 
 							Long/Short-Term Memory (LSTM) is used for speech recognition or machine translation. 
-							For this project, ANN model was chosen considering the data type and the size. The final model will be tuned by testing various hyper-parameters. 
+							For this project, The ANN model was chosen considering the data type and the size. The final model will be tuned by testing various hyper-parameters. 
 							7 hyper-parameters were tested to choose the final model: 
 							1) The number of hidden units, 2) The number of hidden layers, 3) The number of epochs, 4) The number of batch-size, 
 							5) Activation functions, 6) Optimizers. 7) Regularization. 
-							While one parameter is being tested other parameters were fixed as same for accurate comparison.</p>
+							While one parameter is being tested other parameters were fixed as the same for an accurate comparison.</p>
 
 							
-							<p>Beginning of the modeling, pre-processing data was conducted in 4 steps.
+							<p>The beginning of the modeling, pre-processing data was conducted in 4 steps.
 							<ul><li>　Step 1. Checking missing values: The dataset had no missing values</li>
 							<li>　Step 2: One hot encoding: Changed the target variable ‘Class’ to a dummy variable.</li>
 							<li>　Step 3: Data type: Changed the data type from int to float.</li>
@@ -120,8 +120,8 @@
 							<p><center><span class="image fit"><img src="images/Drybean/testaccuracy_hiddenunitnumbers.png" alt="" /></span></center>
 								<center><figcaption><font size = "3"><b>Figure 8.</b> The test accuracy by the number of hidden units</figcaption></font></center></p>
 							
-							<p>The test for the number of hidden units was tested and plotted their test accuracy as figure 8. 
-								Although the graph fluctuated as the number of hidden units increased, generally when there are more hidden units in the model it produced higher test accuracy. 
+							<p>The test for the number of hidden units was tested and their accuracy was plotted as figure 8. 
+								Although the graph fluctuated as the number of hidden units increased, generally, when there are more hidden units in the model, it produced a higher test accuracy. 
 								The maximum test accuracy was from a hidden unit of 121. The higher hidden unit number might lead to the higher test accuracy,
 								 however, due to higher computation cost and the marginal difference between the accuracies, the optimal hidden unit was chosen between 30 to 70.</p>
 							
@@ -141,7 +141,7 @@
 								<center><figcaption><font size = "4"><b>Figure 10.</b> The validation losses(left) and accuracies(right) by the activation functions</figcaption></font></center></p>
 							<p>The comparison between the activation functions was conducted to identify the best activation function for this modeling. 
 								As it can be seen in figure 10, apart from sigmoid function all the others performed similarly. 
-								On the other hand, the validation accuracy graphs have very fluctuated. As additional verification, the test accuracy was compared for a range of hidden units 30 to 70(See table 7). 
+								On the other hand, the validation accuracy graphs have fluctuated greatly. As additional verification, the test accuracy was compared for a range of hidden units 30 to 70(See table 7). 
 								The average test accuracy shows the highest for the Relu function followed by Tanh, Leaky, and Sigmoid functions. </p>
 							
 							<h4>4) Comparison by the batch-size</h4>	
@@ -149,7 +149,7 @@
 							<p><center><span class="image fit"><img src="images/Drybean/batchsize.png" alt="" /></span></center>
 								<center><figcaption><font size = "4"><b>Figure 10.</b> The validation/test losses and accuracies by batch-size</figcaption></font></center></p>
 							<p>During modeling, batch size can be set according to the dataset, but often 32 or 64 are recommended to use. 
-								The performance comparison on different batch-size illustrated in figure 11. 
+								The performance comparison on different batch-size is illustrated in figure 11. 
 								It shows the smaller batch has a higher test accuracy. A smaller batch size leads to faster convergence. 
 								However, If the batch size is too small, the convergence generally is slower and the model can overfit. 
 								The validation loss chart shows when the number epoch increases all the model’s validation loss increases which indicate the overfitting. 
@@ -159,17 +159,12 @@
 
 							<p><center><span class="image fit"><img src="images/Drybean/optimizer.png" alt="" /></span></center>
 								<center><figcaption><font size = "4"><b>Figure 10.</b> The validation/test losses and accuracies by optimizers</figcaption></font></center></p>
-							<p>The optimizer comparison shows Adam and RMSprop had the lowest validation loss and generally high validation accuracy. 
-								However, in terms of test accuracy, the Momentum optimizer was performing better than other optimizers in both test loss and test accuracy.
+							<p>The optimizers comparison shows Adam and RMSprop had the lowest validation loss and generally high validation accuracy. 
+								However, in terms of test accuracy, the Momentum optimizers was performing better than other optimizers in both test loss and test accuracy.
 								Additionally, as it can be seen in figure 12 the epochs between 0 to 100 show some clarity of after certain epochs the performance remains the same. 
 								Generally, when the epoch increases the test accuracy can also increase but it leads to overfitting. 
 								From this chart epoch, 60 was large enough to produce the result.</p>
-							<p>The optimizer comparison shows Adam and RMSprop had the lowest validation loss and generally high validation accuracy. 
-								However, in terms of test accuracy, the Momentum optimizer was performing better than other optimizers in both test loss and test accuracy.
-								Additionally, as it can be seen in figure 12 the epochs between 0 to 100 show some clarity of after certain epochs the performance remains the same. 
-								Generally, when the epoch increases the test accuracy can also increase but it leads to overfitting. 
-								From this chart epoch, 60 was large enough to produce the result.</p>
-
+						
 							<h4>6) Comparison by the Regularization</h4>	
 
 							<p><center><span class="image fit"><img src="images/Drybean/Dropout.png" alt="" /></span></center>
@@ -223,7 +218,7 @@
 									and is extremely expensive to train the model. However, the deep learning model has great potential to improve accuracy by testing different methodologies and can adapt well to new changes in the future.</p>
 								<p><b>Conclusion</b>: The DNN model has great potential, however, the tree-based model can be recommended considering the high computational cost of the DNN model, and marginal differences between the two models test accuracies. 
 									The current data is shown to derive from numerical values extracted from the images. 
-									If future changes in business dictate that ‘image’ data is used directly to train the model or prioritize the improvement of test accuracies, 
+									If future changes in business dictate that ‘image’ data is used directly to train the model or prioritizes the improvement of test accuracies, 
 									then the DNN model will prove to be the better option to use. </p>
 						</div>
 					</div>
